@@ -106,9 +106,22 @@ api/
 
 7. **Verify acceptance criteria**: Check each acceptance criterion from the ticket
 
-8. **Stop for review**: Once all changes are complete, stop and present the changes to the user for review
+8. **Commit changes**: Once all changes are complete:
+   - Stage all relevant files with `git add`
+   - Create a meaningful commit message following this format:
+     ```
+     [<TICKET-ID>] <Short summary of changes>
 
-**IMPORTANT**: Do NOT commit, push, or create pull requests. Only create the branch and make code changes, then stop for user review.
+     - <Bullet point describing key change 1>
+     - <Bullet point describing key change 2>
+     - ...
+     ```
+   - The commit message should reflect the ticket title and summarize what was implemented
+   - Example: `[MEM-20] Implement backend Go project scaffolding`
+
+9. **Stop for review**: After committing, present a summary of changes to the user
+
+**IMPORTANT**: Do NOT push or create pull requests. Only create the branch, make code changes, and commit locally.
 
 ## Rules
 
@@ -133,6 +146,26 @@ api/
 8. **Logging**: Use structured logging (slog) for observability
 
 9. **Code style**: Follow Go conventions (gofmt, effective Go patterns)
+
+10. **Go standards and best practices**:
+    - Follow idiomatic Go patterns (accept interfaces, return structs)
+    - Use meaningful variable names that are concise but descriptive
+    - Prefer short variable names in small scopes (e.g., `r` for request, `w` for writer)
+    - Handle errors explicitly, don't ignore them
+    - Use `context.Context` for cancellation and timeouts
+    - Avoid global state, prefer dependency injection
+
+11. **Go module path**:
+    - Use a platform-agnostic module path: `memwright/api`
+    - Do NOT hardcode hosting platforms in the module path (e.g., avoid `github.com/...` or `gitlab.com/...`)
+    - All internal imports should use the module path as prefix: `memwright/api/internal/...`
+    - This ensures portability if the repository moves between hosting providers
+
+12. **Avoid unnecessary comments**:
+    - Don't add comments that just restate what the code does
+    - Only add comments for non-obvious business logic or complex algorithms
+    - Let the code be self-documenting through clear naming
+    - No redundant godoc comments on unexported functions
 
 ## Example Interaction
 

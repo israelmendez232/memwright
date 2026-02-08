@@ -27,8 +27,9 @@ When the user invokes `/submit-pr`, summarize the current branch changes and cre
    - Push the branch: `git push -u origin <branch-name>`
 
 5. **Create PR with gh**:
-   - Format title: `# TICKET-ID: Short summary from branch name`
-   - Example: `# MEM-22: Docker Compose and Makefile setup`
+   - Format title: `TICKET-ID: Short summary from branch name` (no # in title)
+   - Example title: `MEM-22: Docker Compose and Makefile setup`
+   - Description starts with the title as H1 (with #)
    - Create PR using GitHub CLI:
      ```bash
      gh pr create --title "<title>" --body "<description>"
@@ -39,6 +40,8 @@ When the user invokes `/submit-pr`, summarize the current branch changes and cre
 ## PR Description Template
 
 ```
+# TICKET-ID: Short summary (same as PR title)
+
 <1-2 sentence summary of what this PR does>
 
 ## Changes
@@ -67,10 +70,12 @@ When the user invokes `/submit-pr`, summarize the current branch changes and cre
 
 **Branch**: `mem-22-docker-compose-and-makefile-setup`
 
-**PR Title**: `# MEM-22: Docker Compose and Makefile setup`
+**PR Title**: `MEM-22: Docker Compose and Makefile setup`
 
 **PR Description**:
 ```
+# MEM-22: Docker Compose and Makefile setup
+
 Adds Docker Compose configuration for local development and production, along with a Makefile for common operations.
 
 ## Changes

@@ -54,9 +54,10 @@ web/src/
    - Extract: title (summary), description, tasks, acceptance criteria
    - If the ticket cannot be found, inform the user and stop
 
-2. **Sync with main branch**: Before creating a new branch, ensure you have the latest code:
+2. **ALWAYS sync with main branch first**: Before creating a new branch, you MUST ensure you're on main with the latest code:
    - Run: `git checkout main`
    - Run: `git pull`
+   - **NEVER create a branch from another feature branch**
 
 3. **Create a feature branch**: Based on the ticket title, create a branch name:
    - Format: `<ticket-id-lowercase>-<title-slug>`

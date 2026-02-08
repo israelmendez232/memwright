@@ -1,6 +1,12 @@
 # memwright
 An open-source, web-first spaced repetition learning platform. Self-hostable alternative to Anki with a modern stack, clean dark UI, and extensible algorithm support.
 
+> **WARNING: PERSONAL EXPERIMENT**
+>
+> This project is a personal learning experiment and is currently under active development.
+>
+> **DO NOT USE IN PRODUCTION.** The codebase is incomplete, APIs may change without notice, and there are no stability or security guarantees.
+
 ## Project Overview
 
 An open-source, web-first spaced repetition learning platform. Self-hostable alternative to Anki with a modern stack, clean dark UI, and extensible algorithm support.

@@ -82,9 +82,9 @@ web/src/
 
 7. **Verify acceptance criteria**: Check each acceptance criterion from the ticket
 
-8. **Stop for review**: Once all changes are complete, stop and present the changes to the user for review
+8. **Stop for review**: Present a summary of changes to the user
 
-**IMPORTANT**: Do NOT commit, push, or create pull requests. Only create the branch and make code changes, then stop for user review.
+**IMPORTANT**: Do NOT commit, push, or create pull requests. Only create the branch and make code changes.
 
 ## Rules
 
@@ -101,6 +101,34 @@ web/src/
 6. **Component reuse**: Check for existing components before creating new ones
 
 7. **Type safety**: Define proper TypeScript interfaces for props and state
+
+8. **TypeScript best practices**:
+    - Use strict mode, avoid `any` types
+    - Prefer `interface` for object shapes, `type` for unions/intersections
+    - Use discriminated unions for state management
+    - Leverage type inference where possible
+    - Export types alongside components that use them
+
+9. **React best practices**:
+    - Use functional components with hooks
+    - Keep components small and focused (single responsibility)
+    - Lift state up only when necessary
+    - Use `useMemo` and `useCallback` sparingly, only for actual performance issues
+    - Prefer composition over prop drilling
+    - Co-locate related code (component, styles, types, tests)
+
+10. **Tailwind best practices**:
+    - Use utility classes directly, avoid unnecessary abstractions
+    - Follow mobile-first responsive design (sm:, md:, lg:)
+    - Use consistent spacing scale (p-4, m-2, gap-3)
+    - Leverage shadcn/ui components as base
+    - Extract repeated patterns into reusable components, not CSS classes
+
+11. **Avoid unnecessary comments**:
+    - Don't add comments that just restate what the code does
+    - Only add comments for non-obvious business logic
+    - Let the code be self-documenting through clear naming
+    - No redundant JSDoc on self-explanatory props
 
 ## Example Interaction
 

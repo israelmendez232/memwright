@@ -1,0 +1,13 @@
+# Development Dockerfile with hot reload
+FROM golang:1.22-alpine
+
+WORKDIR /app
+
+# Install air for hot reload
+RUN go install github.com/air-verse/air@latest
+
+# Source code is mounted via volume in docker-compose.yml
+
+EXPOSE 8080
+
+CMD ["air", "-c", ".air.toml"]

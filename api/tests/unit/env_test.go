@@ -16,8 +16,8 @@ func TestLoadEnvFile(t *testing.T) {
 # Comment line
 PORT=9000
 ENVIRONMENT=testing
-DATABASE_HOST="quoted-host"
-DATABASE_PASSWORD='single-quoted'
+POSTGRES_HOST="quoted-host"
+POSTGRES_PASSWORD='single-quoted'
 EMPTY_VALUE=
 `
 	if err := os.WriteFile(envFile, []byte(content), 0644); err != nil {
@@ -26,14 +26,14 @@ EMPTY_VALUE=
 
 	os.Unsetenv("PORT")
 	os.Unsetenv("ENVIRONMENT")
-	os.Unsetenv("DATABASE_HOST")
-	os.Unsetenv("DATABASE_PASSWORD")
+	os.Unsetenv("POSTGRES_HOST")
+	os.Unsetenv("POSTGRES_PASSWORD")
 	os.Unsetenv("EMPTY_VALUE")
 	defer func() {
 		os.Unsetenv("PORT")
 		os.Unsetenv("ENVIRONMENT")
-		os.Unsetenv("DATABASE_HOST")
-		os.Unsetenv("DATABASE_PASSWORD")
+		os.Unsetenv("POSTGRES_HOST")
+		os.Unsetenv("POSTGRES_PASSWORD")
 		os.Unsetenv("EMPTY_VALUE")
 	}()
 
@@ -49,12 +49,12 @@ EMPTY_VALUE=
 		t.Errorf("expected ENVIRONMENT to be 'testing', got '%s'", os.Getenv("ENVIRONMENT"))
 	}
 
-	if os.Getenv("DATABASE_HOST") != "quoted-host" {
-		t.Errorf("expected DATABASE_HOST to be 'quoted-host', got '%s'", os.Getenv("DATABASE_HOST"))
+	if os.Getenv("POSTGRES_HOST") != "quoted-host" {
+		t.Errorf("expected POSTGRES_HOST to be 'quoted-host', got '%s'", os.Getenv("POSTGRES_HOST"))
 	}
 
-	if os.Getenv("DATABASE_PASSWORD") != "single-quoted" {
-		t.Errorf("expected DATABASE_PASSWORD to be 'single-quoted', got '%s'", os.Getenv("DATABASE_PASSWORD"))
+	if os.Getenv("POSTGRES_PASSWORD") != "single-quoted" {
+		t.Errorf("expected POSTGRES_PASSWORD to be 'single-quoted', got '%s'", os.Getenv("POSTGRES_PASSWORD"))
 	}
 }
 

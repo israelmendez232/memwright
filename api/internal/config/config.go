@@ -34,12 +34,12 @@ func Load() (*Config, error) {
 		Environment: getEnv("ENVIRONMENT", "development"),
 		LogLevel:    getEnv("LOG_LEVEL", "info"),
 
-		DatabaseHost:     getEnv("DATABASE_HOST", "localhost"),
-		DatabasePort:     getEnvInt("DATABASE_PORT", 5432),
-		DatabaseUser:     getEnv("DATABASE_USER", "memwright"),
-		DatabasePassword: getEnv("DATABASE_PASSWORD", ""),
-		DatabaseName:     getEnv("DATABASE_NAME", "memwright"),
-		DatabaseSSLMode:  getEnv("DATABASE_SSLMODE", "disable"),
+		DatabaseHost:     getEnv("POSTGRES_HOST", "localhost"),
+		DatabasePort:     getEnvInt("POSTGRES_PORT", 5432),
+		DatabaseUser:     getEnv("POSTGRES_USER", "memwright"),
+		DatabasePassword: getEnv("POSTGRES_PASSWORD", ""),
+		DatabaseName:     getEnv("POSTGRES_DB", "memwright"),
+		DatabaseSSLMode:  getEnv("POSTGRES_SSLMODE", "disable"),
 
 		JWTSecret:          getEnv("JWT_SECRET", ""),
 		JWTExpirationHours: getEnvInt("JWT_EXPIRATION_HOURS", 24),

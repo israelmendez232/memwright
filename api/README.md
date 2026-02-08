@@ -25,12 +25,12 @@ PORT=8080
 ENVIRONMENT=development
 
 # Database Configuration
-DATABASE_HOST=localhost
-DATABASE_PORT=5432
-DATABASE_USER=memwright
-DATABASE_PASSWORD=your_password_here
-DATABASE_NAME=memwright
-DATABASE_SSLMODE=disable
+POSTGRES_HOST=localhost
+POSTGRES_PORT=5432
+POSTGRES_USER=memwright
+POSTGRES_PASSWORD=your_password_here
+POSTGRES_DB=memwright
+POSTGRES_SSLMODE=disable
 
 # JWT Configuration
 JWT_SECRET=your_jwt_secret_key_here_min_32_characters
@@ -101,12 +101,12 @@ The API is configured via environment variables. Create a `.env` file in the `ap
 
 | Variable | Description | Default |
 |----------|-------------|---------|
-| `DATABASE_HOST` | PostgreSQL host | `localhost` |
-| `DATABASE_PORT` | PostgreSQL port | `5432` |
-| `DATABASE_USER` | Database username | `memwright` |
-| `DATABASE_PASSWORD` | Database password | (empty) |
-| `DATABASE_NAME` | Database name | `memwright` |
-| `DATABASE_SSLMODE` | SSL mode (`disable`, `require`, `verify-full`) | `disable` |
+| `POSTGRES_HOST` | PostgreSQL host | `localhost` |
+| `POSTGRES_PORT` | PostgreSQL port | `5432` |
+| `POSTGRES_USER` | Database username | `memwright` |
+| `POSTGRES_PASSWORD` | Database password | (empty) |
+| `POSTGRES_DB` | Database name | `memwright` |
+| `POSTGRES_SSLMODE` | SSL mode (`disable`, `require`, `verify-full`) | `disable` |
 
 ### Authentication
 

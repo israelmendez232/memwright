@@ -37,8 +37,8 @@ func TestLoadFromEnvironment(t *testing.T) {
 
 	os.Setenv("PORT", "3000")
 	os.Setenv("ENVIRONMENT", "production")
-	os.Setenv("DATABASE_HOST", "db.example.com")
-	os.Setenv("DATABASE_PORT", "5433")
+	os.Setenv("POSTGRES_HOST", "db.example.com")
+	os.Setenv("POSTGRES_PORT", "5433")
 	defer clearEnvVars()
 
 	cfg, err := config.Load()
@@ -103,12 +103,12 @@ func TestIsProduction(t *testing.T) {
 
 func TestDatabaseURL(t *testing.T) {
 	clearEnvVars()
-	os.Setenv("DATABASE_HOST", "localhost")
-	os.Setenv("DATABASE_PORT", "5432")
-	os.Setenv("DATABASE_USER", "testuser")
-	os.Setenv("DATABASE_PASSWORD", "testpass")
-	os.Setenv("DATABASE_NAME", "testdb")
-	os.Setenv("DATABASE_SSLMODE", "require")
+	os.Setenv("POSTGRES_HOST", "localhost")
+	os.Setenv("POSTGRES_PORT", "5432")
+	os.Setenv("POSTGRES_USER", "testuser")
+	os.Setenv("POSTGRES_PASSWORD", "testpass")
+	os.Setenv("POSTGRES_DB", "testdb")
+	os.Setenv("POSTGRES_SSLMODE", "require")
 	defer clearEnvVars()
 
 	cfg, err := config.Load()
@@ -141,12 +141,12 @@ func clearEnvVars() {
 	os.Unsetenv("PORT")
 	os.Unsetenv("ENVIRONMENT")
 	os.Unsetenv("LOG_LEVEL")
-	os.Unsetenv("DATABASE_HOST")
-	os.Unsetenv("DATABASE_PORT")
-	os.Unsetenv("DATABASE_USER")
-	os.Unsetenv("DATABASE_PASSWORD")
-	os.Unsetenv("DATABASE_NAME")
-	os.Unsetenv("DATABASE_SSLMODE")
+	os.Unsetenv("POSTGRES_HOST")
+	os.Unsetenv("POSTGRES_PORT")
+	os.Unsetenv("POSTGRES_USER")
+	os.Unsetenv("POSTGRES_PASSWORD")
+	os.Unsetenv("POSTGRES_DB")
+	os.Unsetenv("POSTGRES_SSLMODE")
 	os.Unsetenv("JWT_SECRET")
 	os.Unsetenv("JWT_EXPIRATION_HOURS")
 }

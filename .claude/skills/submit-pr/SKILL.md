@@ -15,24 +15,20 @@ When the user invokes `/submit-pr`, summarize the current branch changes and cre
    - Extract the ticket ID from the branch name (e.g., `mem-22-docker-compose` → `MEM-22`)
 
 2. **Gather changes**:
-   - Run `git log main..HEAD --oneline` to see all commits
+   - Run `git status` to check for uncommitted changes
    - Run `git diff main...HEAD --stat` to see file changes summary
    - Run `git diff main...HEAD` to understand the actual code changes
 
-3. **Create PR title**:
-   - Format: `# TICKET-ID: Short summary from branch name`
-   - Example: `# MEM-22: Docker Compose and Makefile setup`
-   - Convert ticket ID to uppercase
-   - Derive summary from branch name (convert hyphens to spaces, capitalize appropriately)
+3. **Git commit** (if there are changes):
+   - If there are staged/unstaged changes, commit them with a summary
+   - If there are no files to add, skip this step and move forward
 
-4. **Create PR description**:
-   - Write 1-2 sentences summarizing what this PR accomplishes
-   - Add bullet points for key changes (3-5 bullets max)
-   - Keep it concise and focused
-
-5. **Submit the PR**:
-   - Ensure all changes are committed
+4. **Git push**:
    - Push the branch: `git push -u origin <branch-name>`
+
+5. **Create PR with gh**:
+   - Format title: `# TICKET-ID: Short summary from branch name`
+   - Example: `# MEM-22: Docker Compose and Makefile setup`
    - Create PR using GitHub CLI:
      ```bash
      gh pr create --title "<title>" --body "<description>"
@@ -53,7 +49,7 @@ When the user invokes `/submit-pr`, summarize the current branch changes and cre
 
 ## Rules
 
-1. **Always check for uncommitted changes**: If there are uncommitted changes, warn the user and ask if they want to commit first
+1. **Commit if needed, skip if not**: If there are uncommitted changes, commit them. If there are no files to add, move forward with the PR
 
 2. **Keep descriptions brief**: Focus on what changed, not implementation details
 

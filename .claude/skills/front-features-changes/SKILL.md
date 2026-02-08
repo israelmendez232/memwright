@@ -49,8 +49,8 @@ web/src/
 
 ## Workflow
 
-1. **Fetch the Jira ticket**: Use the Jira MCP tool to fetch the ticket details:
-   - Call `mcp__jira__get_issue` with the ticket ID (e.g., `MEM-1`)
+1. **Fetch the Jira ticket**: Use the Atlassian MCP tool to fetch the ticket details:
+   - Call `mcp__atlassian__getJiraIssue` with `cloudId: "45d5c0c7-c3c3-468a-a8fb-7f19720b0424"` and `issueIdOrKey: "<ticket-id>"`
    - Extract: title (summary), description, tasks, acceptance criteria
    - If the ticket cannot be found, inform the user and stop
 

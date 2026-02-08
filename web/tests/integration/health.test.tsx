@@ -1,4 +1,4 @@
-import { render } from '@testing-library/react'
+import { render, screen } from '@testing-library/react'
 import { describe, it, expect } from 'vitest'
 import App from '../../src/App'
 
@@ -9,8 +9,8 @@ describe('Application Health', () => {
   })
 
   it('renders with expected structure', () => {
-    const { container } = render(<App />)
-    const appDiv = container.querySelector('.app')
-    expect(appDiv).toBeInTheDocument()
+    render(<App />)
+    expect(screen.getByRole('banner')).toBeInTheDocument()
+    expect(screen.getByRole('main')).toBeInTheDocument()
   })
 })

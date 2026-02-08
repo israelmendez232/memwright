@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import { ChevronRight, FolderOpen, Plus } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
@@ -29,14 +30,14 @@ export function Sidebar({ className }: SidebarProps) {
       <nav className="flex-1 overflow-y-auto px-2">
         <ul className="space-y-1">
           <li>
-            <a
-              href="/decks/1"
+            <Link
+              to="/decks"
               className="flex items-center gap-2 rounded-md px-3 py-2 text-sm text-sidebar-foreground transition-colors hover:bg-sidebar-accent"
             >
               <FolderOpen className="h-4 w-4 text-sidebar-primary" />
               <span className="flex-1">All Decks</span>
               <ChevronRight className="h-4 w-4 text-muted-foreground" />
-            </a>
+            </Link>
           </li>
         </ul>
       </nav>

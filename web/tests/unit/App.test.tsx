@@ -1,32 +1,53 @@
 import { render, screen } from '@testing-library/react'
 import { describe, it, expect } from 'vitest'
+import { MemoryRouter } from 'react-router-dom'
+import { AuthProvider } from '../../src/context'
 import App from '../../src/App'
 
+function renderApp(initialRoute = '/') {
+  return render(
+    <MemoryRouter initialEntries={[initialRoute]}>
+      <AuthProvider>
+        <App />
+      </AuthProvider>
+    </MemoryRouter>
+  )
+}
+
 describe('App', () => {
-  it('renders the welcome heading', () => {
-    render(<App />)
+  it('redirects unauthenticated users to login', () => {
+    renderApp('/')
     expect(
-      screen.getByRole('heading', { name: /welcome to memwright/i })
+      screen.getByRole('heading', { name: /welcome back/i })
     ).toBeInTheDocument()
   })
 
-  it('renders the app description', () => {
-    render(<App />)
+  it('renders login page at /login', () => {
+    renderApp('/login')
     expect(
-      screen.getByText(/your spaced repetition learning platform/i)
+      screen.getByRole('heading', { name: /welcome back/i })
+    ).toBeInTheDocument()
+    expect(screen.getByLabelText(/email/i)).toBeInTheDocument()
+    expect(screen.getByLabelText(/password/i)).toBeInTheDocument()
+  })
+
+  it('renders register page at /register', () => {
+    renderApp('/register')
+    expect(
+      screen.getByRole('heading', { name: /create an account/i })
+    ).toBeInTheDocument()
+    expect(screen.getByLabelText(/name/i)).toBeInTheDocument()
+  })
+
+  it('shows sign in button on login page', () => {
+    renderApp('/login')
+    expect(
+      screen.getByRole('button', { name: /sign in/i })
     ).toBeInTheDocument()
   })
 
-  it('renders the header with app name', () => {
-    render(<App />)
-    expect(screen.getByText('Memwright')).toBeInTheDocument()
-  })
-
-  it('renders navigation elements', () => {
-    render(<App />)
-    const navElements = screen.getAllByRole('navigation')
-    expect(navElements.length).toBeGreaterThan(0)
-    expect(screen.getByRole('link', { name: /study/i })).toBeInTheDocument()
-    expect(screen.getByRole('link', { name: /statistics/i })).toBeInTheDocument()
+  it('shows link to register from login page', () => {
+    renderApp('/login')
+    expect(screen.getByRole('link', { name: /sign up/i })).toBeInTheDocument()
   })
 })

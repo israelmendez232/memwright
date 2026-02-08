@@ -1,16 +1,6 @@
----
-name: back-features-changes
-description: Work on back-end Go features and API changes based on Jira tickets
-args: ticket-id
----
-
 # Back-End Features and Changes Skill
 
-When the user invokes `/back-features-changes --ticket-id <ID>`, fetch the Jira ticket details via MCP and work on the back-end implementation.
-
-## Input
-
-- `--ticket-id`: The Jira ticket ID (e.g., `MEM-1` or just `1`). If only a number is provided, prefix with `MEM-`.
+When the user invokes `/back-features-changes`, provide context about the back-end architecture and then work on the specified Jira ticket.
 
 ## Back-End Context
 
@@ -72,43 +62,30 @@ api/
 
 ## Workflow
 
-1. **Fetch the Jira ticket**: Use the Jira MCP tool to fetch the ticket details:
-   - Call `mcp__jira__get_issue` with the ticket ID (e.g., `MEM-1`)
-   - Extract: title (summary), description, tasks, acceptance criteria
-   - If the ticket cannot be found, inform the user and stop
+1. **Receive the Jira ticket**: Ask the user to proviqde the Jira ticket details (ticket ID, description, tasks, acceptance criteria)
 
-2. **Create a feature branch**: Based on the ticket title, create a branch name:
-   - Format: `<ticket-id-lowercase>-<title-slug>`
-   - Convert the title to lowercase, replace spaces with hyphens, remove special characters
-   - Example: Ticket `MEM-1` with title "Project Scaffolding and Docker Setup" → branch `mem-1-project-scaffolding-and-docker-setup`
-   - Run: `git checkout -b <branch-name>`
-
-3. **Analyze the ticket**: Review the requirements and identify:
+2. **Analyze the ticket**: Review the requirements and identify:
    - Which handlers need to be created or modified
    - Required service layer changes
    - Database schema or query changes
    - New migrations needed
 
-4. **Explore the codebase**: Before implementing, explore the existing back-end code to:
+3. **Explore the codebase**: Before implementing, explore the existing back-end code to:
    - Understand current patterns and conventions
    - Find similar handlers/services to reference
    - Review existing repository patterns
    - Check model definitions
 
-5. **Plan the implementation**: Create a task list based on the ticket tasks, mapping each to specific files and changes
+4. **Plan the implementation**: Create a task list based on the ticket tasks, mapping each to specific files and changes
 
-6. **Implement the changes**:
+5. **Implement the changes**:
    - Follow the handler → service → repository pattern
    - Write idiomatic Go code
    - Include proper error handling
    - Add input validation in handlers
    - Write SQL migrations for schema changes
 
-7. **Verify acceptance criteria**: Check each acceptance criterion from the ticket
-
-8. **Stop for review**: Once all changes are complete, stop and present the changes to the user for review
-
-**IMPORTANT**: Do NOT commit, push, or create pull requests. Only create the branch and make code changes, then stop for user review.
+6. **Verify acceptance criteria**: Check each acceptance criterion from the ticket
 
 ## Rules
 
@@ -136,15 +113,12 @@ api/
 
 ## Example Interaction
 
-**User**: /back-features-changes --ticket-id MEM-1
+**User**: /back-features-changes
 
-**Assistant**:
-1. Fetches ticket MEM-1 from Jira via MCP
-2. Displays the ticket summary:
-   - Title: "Project Scaffolding and Docker Setup"
-   - Description: Initialize Go project structure...
-   - Tasks: Set up directory structure, Configure Docker Compose...
-3. Creates branch: `git checkout -b mem-1-project-scaffolding-and-docker-setup`
-4. Explores the codebase and plans implementation
-5. Implements changes following the layered architecture
-6. Stops for user review
+**Assistant**: I'll help you work on a back-end feature or change. Please provide the Jira ticket details including:
+- Ticket ID and title
+- Description
+- Tasks
+- Acceptance criteria
+
+Once you share the ticket, I'll analyze the requirements, explore the relevant parts of the codebase, and implement the changes following the project's layered architecture and Go conventions.

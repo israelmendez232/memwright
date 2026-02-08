@@ -1,15 +1,31 @@
 ---
 name: create-jira-tickets
-description: Generate Jira tickets in markdown format with tasks, story points, and acceptance criteria
+description: Generate Jira tickets as individual markdown files in docs/jira/ folder
 ---
 
 # Create Jira Tickets Skill
 
-When the user invokes `/create-jira-tickets`, generate Jira ticket(s) in markdown format following the structure and rules below.
+When the user invokes `/create-jira-tickets`, generate Jira ticket(s) as individual markdown files in the `docs/jira/` folder.
+
+## Usage
+
+```
+/create-jira-tickets                     # Interactive mode - will ask for details
+/create-jira-tickets --context <text>    # Create ticket(s) from provided context
+```
+
+The `--context` argument allows passing a description, requirements, or any text that should be turned into one or more tickets. If the context is too large for a single ticket (>3 story points), automatically break it into multiple tickets.
+
+## File Structure
+
+Each ticket must be saved as a separate markdown file:
+- **Location**: `docs/jira/`
+- **Filename**: `{TICKET-ID}.md` (e.g., `MEM-001.md`, `MEM-002.md`)
+- **One ticket per file** for easier review and version control
 
 ## Ticket Format
 
-Each ticket must be output in the following markdown structure:
+Each markdown file must follow this structure:
 
 ```markdown
 # [TICKET-XXX] Ticket Title
@@ -18,7 +34,7 @@ Each ticket must be output in the following markdown structure:
 [High | Medium | Low]
 
 ## Story Points
-[Total points - sum of task points]
+[1-3]
 
 ## Description
 
@@ -28,9 +44,9 @@ Each ticket must be output in the following markdown structure:
 
 ## Tasks
 
-- [ ] Task 1 (X pts)
-- [ ] Task 2 (X pts)
-- [ ] Task 3 (X pts)
+- [ ] Task 1
+- [ ] Task 2
+- [ ] Task 3
 ...
 
 ## Acceptance Criteria
@@ -41,78 +57,57 @@ Each ticket must be output in the following markdown structure:
 ...
 ```
 
+## IMPORTANT
+
+**NO NEED TO SEARCH FOR OTHER TICKETS, JUST CREATE THEM.** Do not query Jira or search for existing tickets before creating new ones. Simply create the markdown files directly.
+
 ## Rules
 
 1. **No Emojis**: Never use emojis anywhere in the ticket content.
 
-2. **Description**:
+2. **One File Per Ticket**: Each ticket must be saved as its own markdown file in `docs/jira/`.
+
+3. **Sequential Numbering**: Use sequential ticket IDs (MEM-001, MEM-002, etc.). Check existing files in `docs/jira/` to determine the next available number.
+
+4. **Description**:
    - Must contain at least 2 paragraphs
    - First paragraph: Context, background, and business value
    - Second paragraph: Technical approach and considerations
 
-3. **Tasks**:
+5. **Tasks**:
    - Maximum of 10 tasks per ticket
-   - Each task must have story points assigned (1, 2, or 3 points max)
-   - If a task would require more than 3 points, split it into separate tasks
    - Tasks should be actionable and specific
    - Use imperative mood (e.g., "Implement...", "Create...", "Add...")
+   - **Do NOT include story points in individual tasks** - story points are only shown in the Story Points section
 
-4. **Acceptance Criteria**:
+6. **Acceptance Criteria**:
    - Maximum of 10 acceptance criteria per ticket
    - Each criterion should be testable and verifiable
    - Use clear, measurable language
    - Cover both functional and non-functional requirements where applicable
 
-5. **Story Points**:
-   - 1 point: Simple, straightforward task (few hours)
-   - 2 points: Moderate complexity task (half day to full day)
-   - 3 points: Complex task requiring significant effort (more than a day but less than 2)
-   - If a task exceeds 3 points, it must be broken down into smaller tasks
-   - Total story points = sum of all task points
+7. **Story Points**:
+   - **1 story point = 1 business day**
+   - **Maximum 3 story points per ticket** - if total exceeds 3, the ticket MUST be broken into multiple smaller tickets
+   - Each ticket must be independently deliverable
+   - Story points are shown ONLY in the Story Points section, not repeated elsewhere
 
-6. **Priority**:
+8. **Priority**:
    - High: Critical for release, blocking other work, or time-sensitive
    - Medium: Important but not blocking, should be done soon
    - Low: Nice to have, can be deferred if needed
 
 ## Workflow
 
-1. Ask the user what feature, bug fix, or work item they want to create a ticket for
-2. Gather any additional context needed (technical requirements, dependencies, etc.)
-3. Generate the ticket(s) in the specified markdown format
-4. If the scope is too large for a single ticket, suggest breaking it into multiple tickets
-5. Output all tickets as markdown that can be copied directly
+1. If `--context` is provided, use that as the input; otherwise ask the user for details
+2. Check existing files in `docs/jira/` to determine the next ticket number
+3. If scope exceeds 3 story points, break into multiple tickets
+4. Generate the ticket(s) in the specified markdown format
+5. Save each ticket as a separate file in `docs/jira/{TICKET-ID}.md`
+6. Report the created files to the user
 
-## Example Output
+## Output
 
-# [TICKET-001] Implement User Authentication API
-
-## Priority
-High
-
-## Story Points
-8
-
-## Description
-
-The application currently lacks a secure authentication mechanism, which prevents users from accessing personalized features and protected resources. This ticket covers the implementation of a JWT-based authentication API that will handle user login, token generation, and token validation. This is a foundational requirement for all user-specific functionality in the system.
-
-The implementation will use industry-standard security practices including bcrypt for password hashing, JWT tokens with appropriate expiration times, and secure HTTP-only cookies for token storage. The API will be built following RESTful conventions and will integrate with the existing user database schema.
-
-## Tasks
-
-- [ ] Create authentication controller with login endpoint (2 pts)
-- [ ] Implement password hashing utility using bcrypt (1 pt)
-- [ ] Create JWT token generation service (2 pts)
-- [ ] Implement token validation middleware (2 pts)
-- [ ] Add logout endpoint with token invalidation (1 pt)
-
-## Acceptance Criteria
-
-- [ ] Users can log in with valid email and password credentials
-- [ ] Invalid credentials return appropriate error messages
-- [ ] JWT tokens are generated with 24-hour expiration
-- [ ] Protected routes reject requests without valid tokens
-- [ ] Passwords are never stored or transmitted in plain text
-- [ ] API responses follow the established error format
-- [ ] All endpoints are documented in the API specification
+After creating tickets, report:
+- List of created files with their paths
+- Summary of total story points across all created tickets

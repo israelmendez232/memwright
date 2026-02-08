@@ -97,3 +97,23 @@ REST API at `/api/v1/`:
 - **Cheap to run**: target < $10/mo for personal instance
 - **Self-host first**: Docker Compose as primary deployment
 - **Single VPS**: Caddy (reverse proxy + TLS) → Go API → PostgreSQL
+
+## Jira Configuration
+
+- When creating Jira tickets, always use project key `MEM` (board ID: 35)
+- Default issue type: Story
+- Default components: ["Backend"]
+- Always assign to the current sprint unless specified otherwise
+
+### Story Points Estimation
+- **1 story point = 1 business day**
+- **Maximum 3 story points per ticket** - if a ticket exceeds 3 points, it MUST be broken down into smaller tickets
+- When breaking down tickets, ensure each sub-ticket is independently deliverable
+
+### Field Mappings
+- **Story Points**: `customfield_10016` (use in `additional_fields`)
+- **Sprint**: `customfield_10020`
+- **Cloud ID**: `45d5c0c7-c3c3-468a-a8fb-7f19720b0424`
+
+### Notes
+- Priority field is not enabled for Stories in this project

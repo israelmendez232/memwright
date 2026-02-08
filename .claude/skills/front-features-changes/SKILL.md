@@ -1,11 +1,16 @@
 ---
 name: front-features-changes
 description: Work on front-end React/TypeScript features based on Jira tickets
+args: ticket-id
 ---
 
 # Front-End Features and Changes Skill
 
-When the user invokes `/front-features-changes`, provide context about the front-end architecture and then work on the specified Jira ticket.
+When the user invokes `/front-features-changes --ticket-id <ID>`, fetch the Jira ticket details via MCP and work on the front-end implementation.
+
+## Input
+
+- `--ticket-id`: The Jira ticket ID (e.g., `MEM-1` or just `1`). If only a number is provided, prefix with `MEM-`.
 
 ## Front-End Context
 
@@ -44,9 +49,16 @@ web/src/
 
 ## Workflow
 
-1. **Create a new branch**: Create a new git branch for this work (e.g., `feature/TICKET-123-description`)
+1. **Fetch the Jira ticket**: Use the Jira MCP tool to fetch the ticket details:
+   - Call `mcp__jira__get_issue` with the ticket ID (e.g., `MEM-1`)
+   - Extract: title (summary), description, tasks, acceptance criteria
+   - If the ticket cannot be found, inform the user and stop
 
-2. **Receive the Jira ticket**: Ask the user to provide the Jira ticket details (ticket ID, description, tasks, acceptance criteria)
+2. **Create a feature branch**: Based on the ticket title, create a branch name:
+   - Format: `<ticket-id-lowercase>-<title-slug>`
+   - Convert the title to lowercase, replace spaces with hyphens, remove special characters
+   - Example: Ticket `MEM-1` with title "Project Scaffolding and Docker Setup" → branch `mem-1-project-scaffolding-and-docker-setup`
+   - Run: `git checkout -b <branch-name>`
 
 3. **Analyze the ticket**: Review the requirements and identify:
    - Which components need to be created or modified
@@ -92,12 +104,15 @@ web/src/
 
 ## Example Interaction
 
-**User**: /front-features-changes
+**User**: /front-features-changes --ticket-id MEM-5
 
-**Assistant**: I'll help you work on a front-end feature or change. Please provide the Jira ticket details including:
-- Ticket ID and title
-- Description
-- Tasks
-- Acceptance criteria
-
-Once you share the ticket, I'll analyze the requirements, explore the relevant parts of the codebase, and implement the changes following the project's patterns and conventions.
+**Assistant**:
+1. Fetches ticket MEM-5 from Jira via MCP
+2. Displays the ticket summary:
+   - Title: "Dashboard Stats Component"
+   - Description: Create a stats dashboard showing review metrics...
+   - Tasks: Create StatsCard component, Implement charts...
+3. Creates branch: `git checkout -b mem-5-dashboard-stats-component`
+4. Explores the codebase and plans implementation
+5. Implements changes following React/TypeScript patterns
+6. Stops for user review

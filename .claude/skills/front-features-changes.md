@@ -1,3 +1,8 @@
+---
+name: front-features-changes
+description: Work on front-end React/TypeScript features based on Jira tickets
+---
+
 # Front-End Features and Changes Skill
 
 When the user invokes `/front-features-changes`, provide context about the front-end architecture and then work on the specified Jira ticket.

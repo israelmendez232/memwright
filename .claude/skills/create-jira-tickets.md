@@ -1,3 +1,8 @@
+---
+name: create-jira-tickets
+description: Generate Jira tickets in markdown format with tasks, story points, and acceptance criteria
+---
+
 # Create Jira Tickets Skill
 
 When the user invokes `/create-jira-tickets`, generate Jira ticket(s) in markdown format following the structure and rules below.

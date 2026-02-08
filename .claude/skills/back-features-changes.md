@@ -1,3 +1,8 @@
+---
+name: back-features-changes
+description: Work on back-end Go features and API changes based on Jira tickets
+---
+
 # Back-End Features and Changes Skill
 
 When the user invokes `/back-features-changes`, provide context about the back-end architecture and then work on the specified Jira ticket.

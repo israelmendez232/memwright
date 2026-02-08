@@ -39,29 +39,35 @@ web/src/
 
 ## Workflow
 
-1. **Receive the Jira ticket**: Ask the user to provide the Jira ticket details (ticket ID, description, tasks, acceptance criteria)
+1. **Create a new branch**: Create a new git branch for this work (e.g., `feature/TICKET-123-description`)
 
-2. **Analyze the ticket**: Review the requirements and identify:
+2. **Receive the Jira ticket**: Ask the user to provide the Jira ticket details (ticket ID, description, tasks, acceptance criteria)
+
+3. **Analyze the ticket**: Review the requirements and identify:
    - Which components need to be created or modified
    - Which pages are affected
    - Required hooks or utilities
    - Any new dependencies needed
 
-3. **Explore the codebase**: Before implementing, explore the existing front-end code to:
+4. **Explore the codebase**: Before implementing, explore the existing front-end code to:
    - Understand current patterns and conventions
    - Find similar components to reference
    - Identify shared utilities to reuse
 
-4. **Plan the implementation**: Create a task list based on the ticket tasks, mapping each to specific files and changes
+5. **Plan the implementation**: Create a task list based on the ticket tasks, mapping each to specific files and changes
 
-5. **Implement the changes**:
+6. **Implement the changes**:
    - Follow existing code style and patterns
    - Use TypeScript strictly (no `any` types unless absolutely necessary)
    - Write components as functional components with hooks
    - Ensure responsive design works on mobile and desktop
    - Add appropriate accessibility attributes
 
-6. **Verify acceptance criteria**: Check each acceptance criterion from the ticket
+7. **Verify acceptance criteria**: Check each acceptance criterion from the ticket
+
+8. **Stop for review**: Once all changes are complete, stop and present the changes to the user for review
+
+**IMPORTANT**: Do NOT commit, push, or create pull requests. Only create the branch and make code changes, then stop for user review.
 
 ## Rules
 

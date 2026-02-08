@@ -106,22 +106,9 @@ api/
 
 7. **Verify acceptance criteria**: Check each acceptance criterion from the ticket
 
-8. **Commit changes**: Once all changes are complete:
-   - Stage all relevant files with `git add`
-   - Create a meaningful commit message following this format:
-     ```
-     [<TICKET-ID>] <Short summary of changes>
+8. **Stop for review**: Present a summary of changes to the user
 
-     - <Bullet point describing key change 1>
-     - <Bullet point describing key change 2>
-     - ...
-     ```
-   - The commit message should reflect the ticket title and summarize what was implemented
-   - Example: `[MEM-20] Implement backend Go project scaffolding`
-
-9. **Stop for review**: After committing, present a summary of changes to the user
-
-**IMPORTANT**: Do NOT push or create pull requests. Only create the branch, make code changes, and commit locally.
+**IMPORTANT**: Do NOT commit, push, or create pull requests. Only create the branch and make code changes.
 
 ## Rules
 

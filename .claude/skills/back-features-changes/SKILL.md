@@ -112,7 +112,7 @@ api/
 
 9. **Stop for review**: Present a summary of changes to the user
 
-**IMPORTANT**: Do NOT commit, push, or create pull requests. Only create the branch and make code changes.
+**IMPORTANT**: Do NOT run any git commands after making code changes. No `git add`, no `git commit`, no `git push`, no staging, no pull requests. Only create the branch at the start, then make code changes and stop.
 
 ## Rules
 

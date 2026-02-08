@@ -54,35 +54,39 @@ web/src/
    - Extract: title (summary), description, tasks, acceptance criteria
    - If the ticket cannot be found, inform the user and stop
 
-2. **Create a feature branch**: Based on the ticket title, create a branch name:
+2. **Sync with main branch**: Before creating a new branch, ensure you have the latest code:
+   - Run: `git checkout main`
+   - Run: `git pull`
+
+3. **Create a feature branch**: Based on the ticket title, create a branch name:
    - Format: `<ticket-id-lowercase>-<title-slug>`
    - Convert the title to lowercase, replace spaces with hyphens, remove special characters
    - Example: Ticket `MEM-1` with title "Project Scaffolding and Docker Setup" → branch `mem-1-project-scaffolding-and-docker-setup`
    - Run: `git checkout -b <branch-name>`
 
-3. **Analyze the ticket**: Review the requirements and identify:
+4. **Analyze the ticket**: Review the requirements and identify:
    - Which components need to be created or modified
    - Which pages are affected
    - Required hooks or utilities
    - Any new dependencies needed
 
-4. **Explore the codebase**: Before implementing, explore the existing front-end code to:
+5. **Explore the codebase**: Before implementing, explore the existing front-end code to:
    - Understand current patterns and conventions
    - Find similar components to reference
    - Identify shared utilities to reuse
 
-5. **Plan the implementation**: Create a task list based on the ticket tasks, mapping each to specific files and changes
+6. **Plan the implementation**: Create a task list based on the ticket tasks, mapping each to specific files and changes
 
-6. **Implement the changes**:
+7. **Implement the changes**:
    - Follow existing code style and patterns
    - Use TypeScript strictly (no `any` types unless absolutely necessary)
    - Write components as functional components with hooks
    - Ensure responsive design works on mobile and desktop
    - Add appropriate accessibility attributes
 
-7. **Verify acceptance criteria**: Check each acceptance criterion from the ticket
+8. **Verify acceptance criteria**: Check each acceptance criterion from the ticket
 
-8. **Stop for review**: Present a summary of changes to the user
+9. **Stop for review**: Present a summary of changes to the user
 
 **IMPORTANT**: Do NOT commit, push, or create pull requests. Only create the branch and make code changes.
 
@@ -140,7 +144,8 @@ web/src/
    - Title: "Dashboard Stats Component"
    - Description: Create a stats dashboard showing review metrics...
    - Tasks: Create StatsCard component, Implement charts...
-3. Creates branch: `git checkout -b mem-5-dashboard-stats-component`
-4. Explores the codebase and plans implementation
-5. Implements changes following React/TypeScript patterns
-6. Stops for user review
+3. Syncs with main: `git checkout main && git pull`
+4. Creates branch: `git checkout -b mem-5-dashboard-stats-component`
+5. Explores the codebase and plans implementation
+6. Implements changes following React/TypeScript patterns
+7. Stops for user review

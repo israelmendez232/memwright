@@ -1,6 +1,8 @@
 export {
   apiClient,
   authApi,
+  deckApi,
+  statsApi,
   getAccessToken,
   getRefreshToken,
   setTokens,
@@ -10,4 +12,10 @@ export {
   type LoginRequest,
   type RegisterRequest,
   type AuthResponse,
+  type Deck,
+  type CreateDeckRequest,
+  type UpdateDeckRequest,
+  type DeckStats,
+  type ReviewActivity,
+  type GlobalStats,
 } from './client'

@@ -167,3 +167,85 @@ export const authApi = {
 
   me: () => apiClient.get<User>('/auth/me'),
 }
+
+export interface Deck {
+  id: string
+  userId: string
+  parentId: string | null
+  name: string
+  description: string
+  cardCount: number
+  newCount: number
+  dueCount: number
+  children?: Deck[]
+  createdAt: string
+  updatedAt: string
+}
+
+export interface CreateDeckRequest {
+  name: string
+  description?: string
+  parentId?: string | null
+}
+
+export interface UpdateDeckRequest {
+  name?: string
+  description?: string
+  parentId?: string | null
+}
+
+export interface DeckStats {
+  totalCards: number
+  newCards: number
+  dueCards: number
+  learnedCards: number
+  masteredCards: number
+}
+
+export interface ReviewActivity {
+  date: string
+  count: number
+}
+
+export interface GlobalStats {
+  totalDecks: number
+  totalCards: number
+  newCards: number
+  cardsLearned: number
+  cardsToReview: number
+  masteredCards: number
+  currentStreak: number
+  longestStreak: number
+  dailyAverage: number
+  daysLearned: number
+  totalDays: number
+  retentionRate: number
+  totalReviews: number
+  reviewTime: number
+}
+
+export const deckApi = {
+  getAll: () => apiClient.get<Deck[]>('/decks'),
+
+  getById: (id: string) => apiClient.get<Deck>(`/decks/${id}`),
+
+  create: (data: CreateDeckRequest) => apiClient.post<Deck>('/decks', data),
+
+  update: (id: string, data: UpdateDeckRequest) =>
+    apiClient.patch<Deck>(`/decks/${id}`, data),
+
+  delete: (id: string) => apiClient.delete(`/decks/${id}`),
+
+  getSubdecks: (id: string) => apiClient.get<Deck[]>(`/decks/${id}/subdecks`),
+
+  getStats: (id: string) => apiClient.get<DeckStats>(`/stats/decks/${id}`),
+}
+
+export const statsApi = {
+  getGlobal: () => apiClient.get<GlobalStats>('/stats/global'),
+
+  getHeatmap: (year?: number) =>
+    apiClient.get<ReviewActivity[]>('/stats/heatmap', {
+      params: year ? { year } : undefined,
+    }),
+}

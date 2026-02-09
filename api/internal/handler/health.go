@@ -33,5 +33,5 @@ func (handler *HealthHandler) ServeHTTP(writer http.ResponseWriter, request *htt
 
 	writer.Header().Set("Content-Type", "application/json")
 	writer.WriteHeader(http.StatusOK)
-	json.NewEncoder(writer).Encode(response)
+	_ = json.NewEncoder(writer).Encode(response)
 }

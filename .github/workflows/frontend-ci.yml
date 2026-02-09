@@ -32,4 +32,6 @@ jobs:
       - run: npm ci
       - run: npm run lint
       - run: npm run test
+        env:
+          VITE_API_URL: http://localhost:8080/api/v1
       - run: npm run build

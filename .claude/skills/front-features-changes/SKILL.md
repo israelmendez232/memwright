@@ -54,16 +54,19 @@ web/src/
    - Extract: title (summary), description, tasks, acceptance criteria
    - If the ticket cannot be found, inform the user and stop
 
-2. **ALWAYS sync with main branch first**: Before creating a new branch, you MUST ensure you're on main with the latest code:
+2. **ALWAYS sync with main and use git worktree**: Before creating a new branch, you MUST ensure you're on main with the latest code and use git worktree for isolation:
+   - Run: `cd /Users/israelmendesdasilva/Desktop/code/memwright` (go to main worktree)
    - Run: `git checkout main`
    - Run: `git pull`
    - **NEVER create a branch from another feature branch**
 
-3. **Create a feature branch**: Based on the ticket title, create a branch name:
+3. **Create a feature branch with worktree**: Based on the ticket title, create a branch name and worktree:
    - Format: `<ticket-id-lowercase>-<title-slug>`
    - Convert the title to lowercase, replace spaces with hyphens, remove special characters
    - Example: Ticket `MEM-1` with title "Project Scaffolding and Docker Setup" → branch `mem-1-project-scaffolding-and-docker-setup`
-   - Run: `git checkout -b <branch-name>`
+   - Clean up existing worktree if present: `git worktree remove ../memwright-<branch-name> --force 2>/dev/null || true`
+   - Create new worktree: `git worktree add ../memwright-<branch-name> -b <branch-name>`
+   - Change to worktree: `cd ../memwright-<branch-name>`
 
 4. **Analyze the ticket**: Review the requirements and identify:
    - Which components need to be created or modified
@@ -135,6 +138,13 @@ web/src/
     - Let the code be self-documenting through clear naming
     - No redundant JSDoc on self-explanatory props
 
+12. **Git worktree workflow**:
+    - Always use git worktree for feature branches to avoid context switching
+    - Each worktree is isolated with its own working directory, node_modules, build artifacts
+    - Branches are global across worktrees, so commits/pushes work the same way
+    - Worktrees enable parallel development: work on multiple features simultaneously
+    - Clean up worktrees after PR merge (user will handle this separately)
+
 ## Example Interaction
 
 **User**: /front-features-changes --ticket-id MEM-5
@@ -145,8 +155,8 @@ web/src/
    - Title: "Dashboard Stats Component"
    - Description: Create a stats dashboard showing review metrics...
    - Tasks: Create StatsCard component, Implement charts...
-3. Syncs with main: `git checkout main && git pull`
-4. Creates branch: `git checkout -b mem-5-dashboard-stats-component`
+3. Syncs with main: `cd /Users/israelmendesdasilva/Desktop/code/memwright && git checkout main && git pull`
+4. Creates worktree: `git worktree remove ../memwright-mem-5-dashboard-stats-component --force 2>/dev/null || true && git worktree add ../memwright-mem-5-dashboard-stats-component -b mem-5-dashboard-stats-component && cd ../memwright-mem-5-dashboard-stats-component`
 5. Explores the codebase and plans implementation
 6. Implements changes following React/TypeScript patterns
 7. Stops for user review

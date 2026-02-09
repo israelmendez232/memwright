@@ -26,13 +26,13 @@ type ReviewLog struct {
 }
 
 type StudySession struct {
-	ID             int64     `json:"id" db:"id"`
-	UserID         int64     `json:"user_id" db:"user_id"`
-	DeckID         int64     `json:"deck_id" db:"deck_id"`
-	CardsStudied   int       `json:"cards_studied" db:"cards_studied"`
-	CardsCorrect   int       `json:"cards_correct" db:"cards_correct"`
-	CardsWrong     int       `json:"cards_wrong" db:"cards_wrong"`
-	TotalDuration  int       `json:"total_duration" db:"total_duration"`
-	StartedAt      time.Time `json:"started_at" db:"started_at"`
-	EndedAt        time.Time `json:"ended_at" db:"ended_at"`
+	ID            int64     `json:"id" db:"id"`
+	UserID        int64     `json:"user_id" db:"user_id"`
+	DeckID        int64     `json:"deck_id" db:"deck_id"`
+	CardsStudied  int       `json:"cards_studied" db:"cards_studied"`
+	CardsCorrect  int       `json:"cards_correct" db:"cards_correct"`
+	CardsWrong    int       `json:"cards_wrong" db:"cards_wrong"`
+	TotalDuration int       `json:"total_duration" db:"total_duration"`
+	StartedAt     time.Time `json:"started_at" db:"started_at"`
+	EndedAt       time.Time `json:"ended_at" db:"ended_at"`
 }

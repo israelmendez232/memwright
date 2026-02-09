@@ -101,6 +101,6 @@ func TestLevelString(t *testing.T) {
 	}
 }
 
-func TestLoggerImplementsInterface(t *testing.T) {
+func TestLoggerImplementsInterface(_ *testing.T) {
 	var _ logger.Logger = logger.New(nil, logger.LevelInfo)
 }

@@ -1,4 +1,8 @@
 # memwright
+
+[![Frontend CI](https://github.com/israelmendez232/memwright/actions/workflows/frontend-ci.yml/badge.svg)](https://github.com/israelmendez232/memwright/actions/workflows/frontend-ci.yml)
+[![Backend CI](https://github.com/israelmendez232/memwright/actions/workflows/backend-ci.yml/badge.svg)](https://github.com/israelmendez232/memwright/actions/workflows/backend-ci.yml)
+
 An open-source, web-first spaced repetition learning platform. Self-hostable alternative to Anki with a modern stack, clean dark UI, and extensible algorithm support.
 
 > **WARNING: PERSONAL EXPERIMENT**

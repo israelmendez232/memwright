@@ -10,7 +10,7 @@ When the user invokes `/sync-jira-tickets`, read Jira ticket markdown files from
 ## Source Files
 
 - **Location**: `docs/jira/`
-- **File pattern**: `MEM-*.md`
+- **File pattern**: `*.md`
 - **Format**: Standard Jira ticket markdown format (see create-jira-tickets skill)
 
 ## Jira Configuration
@@ -27,12 +27,10 @@ Reference from CLAUDE.md:
 ### 1. Discovery Phase
 1. List all markdown files in `docs/jira/` folder
 2. Parse each file to extract ticket information
-3. Check which tickets already exist in Jira (by key)
 
 ### 2. Parsing Phase
 For each markdown file, extract:
-- **Ticket ID**: From filename (e.g., `MEM-001.md` -> `MEM-1`)
-- **Title**: From the `# [TICKET-XXX] Title` header
+- **Title**: From the `# [TICKET-XXX] Title` or `# Title` header
 - **Priority**: From the `## Priority` section
 - **Story Points**: From the `## Story Points` section (number only)
 - **Description**: Full content of `## Description` section
@@ -42,18 +40,13 @@ For each markdown file, extract:
 ### 3. Sync Phase
 For each parsed ticket:
 
-**If ticket does NOT exist in Jira:**
 1. Create new issue using `mcp__atlassian__createJiraIssue`
 2. Set fields:
    - `projectKey`: "MEM"
    - `issueTypeName`: "Story"
-   - `summary`: Ticket title (without the [TICKET-XXX] prefix)
+   - `summary`: Ticket title (without the [TICKET-XXX] prefix if present)
    - `description`: Combined description, tasks, and acceptance criteria in markdown
    - `additional_fields`: `{"customfield_10016": <story_points>}`
-
-**If ticket ALREADY exists in Jira:**
-1. Report it as "already exists" (skip by default)
-2. If user requests `--force` or `--update`, use `mcp__atlassian__editJiraIssue` to update
 
 ### 4. Cleanup Phase
 After successful sync:
@@ -64,16 +57,13 @@ After successful sync:
 ### 5. Report Phase
 After sync, report:
 - Tickets created (with Jira URLs)
-- Tickets skipped (already exist)
 - Tickets failed (with error details)
 - Files deleted from docs/jira/
 - Total story points synced
 
 ## Commands
 
-- `/sync-jira-tickets` - Sync all new tickets (skip existing)
-- `/sync-jira-tickets --all` - Sync all tickets, updating existing ones
-- `/sync-jira-tickets MEM-001 MEM-002` - Sync specific tickets only
+- `/sync-jira-tickets` - Sync all tickets from docs/jira/ to Jira
 - `/sync-jira-tickets --dry-run` - Show what would be synced without making changes
 
 ## Description Format for Jira
@@ -103,25 +93,22 @@ When creating the Jira description, combine sections:
 ```
 User: /sync-jira-tickets
 
-Claude: Found 5 markdown files in docs/jira/:
-- MEM-001.md
-- MEM-002.md
-- MEM-003.md
-- MEM-004.md
-- MEM-005.md
+Claude: Found 3 markdown files in docs/jira/:
+- Backend Integration Tests.md
+- Backend Subdeck Support.md
+- Frontend Subdeck Visualization.md
 
 Syncing to Jira...
 
 Created:
-- MEM-1: Project Scaffolding (8 pts) - https://israelmendez232.atlassian.net/browse/MEM-1
-- MEM-2: Database Schema (10 pts) - https://israelmendez232.atlassian.net/browse/MEM-2
-
-Skipped (already exist):
-- MEM-3, MEM-4, MEM-5
+- MEM-27: Backend Integration Tests with Database (3 pts) - https://israelmendez232.atlassian.net/browse/MEM-27
+- MEM-28: Backend Subdeck Support - Nested Deck Hierarchy (3 pts) - https://israelmendez232.atlassian.net/browse/MEM-28
+- MEM-29: Frontend Subdeck Visualization and Navigation (3 pts) - https://israelmendez232.atlassian.net/browse/MEM-29
 
 Deleted from docs/jira/:
-- MEM-001.md
-- MEM-002.md
+- Backend Integration Tests.md
+- Backend Subdeck Support.md
+- Frontend Subdeck Visualization.md
 
-Summary: 2 created, 3 skipped, 2 files deleted, 18 story points synced
+Summary: 3 created, 3 files deleted, 9 story points synced
 ```

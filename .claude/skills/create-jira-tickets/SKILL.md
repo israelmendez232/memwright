@@ -20,15 +20,16 @@ The `--context` argument allows passing a description, requirements, or any text
 
 Each ticket must be saved as a separate markdown file:
 - **Location**: `docs/jira/`
-- **Filename**: `{TICKET-ID}.md` (e.g., `MEM-001.md`, `MEM-002.md`)
+- **Filename**: `{TITLE NAME}.md` (e.g., `Backend Integration Tests.md`, `Authentication Service.md`)
 - **One ticket per file** for easier review and version control
+- Use descriptive filenames based on the ticket title (no ticket ID prefix needed)
 
 ## Ticket Format
 
 Each markdown file must follow this structure:
 
 ```markdown
-# [TICKET-XXX] Ticket Title
+# Ticket Title
 
 ## Priority
 [High | Medium | Low]
@@ -65,34 +66,32 @@ Each markdown file must follow this structure:
 
 1. **No Emojis**: Never use emojis anywhere in the ticket content.
 
-2. **One File Per Ticket**: Each ticket must be saved as its own markdown file in `docs/jira/`.
+2. **One File Per Ticket**: Each ticket must be saved as its own markdown file in `docs/jira/` with a descriptive filename based on the title.
 
-3. **Sequential Numbering**: Use sequential ticket IDs (MEM-001, MEM-002, etc.). Check existing files in `docs/jira/` to determine the next available number.
-
-4. **Description**:
+3. **Description**:
    - Must contain at least 2 paragraphs
    - First paragraph: Context, background, and business value
    - Second paragraph: Technical approach and considerations
 
-5. **Tasks**:
+4. **Tasks**:
    - Maximum of 10 tasks per ticket
    - Tasks should be actionable and specific
    - Use imperative mood (e.g., "Implement...", "Create...", "Add...")
    - **Do NOT include story points in individual tasks** - story points are only shown in the Story Points section
 
-6. **Acceptance Criteria**:
+5. **Acceptance Criteria**:
    - Maximum of 10 acceptance criteria per ticket
    - Each criterion should be testable and verifiable
    - Use clear, measurable language
    - Cover both functional and non-functional requirements where applicable
 
-7. **Story Points**:
+6. **Story Points**:
    - **1 story point = 1 business day**
    - **Maximum 3 story points per ticket** - if total exceeds 3, the ticket MUST be broken into multiple smaller tickets
    - Each ticket must be independently deliverable
    - Story points are shown ONLY in the Story Points section, not repeated elsewhere
 
-8. **Priority**:
+7. **Priority**:
    - High: Critical for release, blocking other work, or time-sensitive
    - Medium: Important but not blocking, should be done soon
    - Low: Nice to have, can be deferred if needed
@@ -100,11 +99,10 @@ Each markdown file must follow this structure:
 ## Workflow
 
 1. If `--context` is provided, use that as the input; otherwise ask the user for details
-2. Check existing files in `docs/jira/` to determine the next ticket number
-3. If scope exceeds 3 story points, break into multiple tickets
-4. Generate the ticket(s) in the specified markdown format
-5. Save each ticket as a separate file in `docs/jira/{TICKET-ID}.md`
-6. Report the created files to the user
+2. If scope exceeds 3 story points, break into multiple tickets
+3. Generate the ticket(s) in the specified markdown format
+4. Save each ticket as a separate file in `docs/jira/{TITLE NAME}.md` using a descriptive filename
+5. Report the created files to the user
 
 ## Output
 

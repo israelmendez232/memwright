@@ -4,11 +4,11 @@
       ".."
     ],
     "allow": [
-      "Read",
-      "Write",
-      "Edit",
-      "Glob",
-      "Grep",
+      "Read(*)",
+      "Write(*)",
+      "Edit(*)",
+      "Glob(*)",
+      "Grep(*)",
       "WebFetch",
       "WebSearch",
       "Bash(cd *)",

@@ -55,11 +55,18 @@ For each parsed ticket:
 1. Report it as "already exists" (skip by default)
 2. If user requests `--force` or `--update`, use `mcp__atlassian__editJiraIssue` to update
 
-### 4. Report Phase
+### 4. Cleanup Phase
+After successful sync:
+1. Delete markdown files for tickets that were successfully created in Jira
+2. Keep markdown files for tickets that failed or were skipped
+3. Use Bash tool with `rm` command to delete the files
+
+### 5. Report Phase
 After sync, report:
 - Tickets created (with Jira URLs)
 - Tickets skipped (already exist)
 - Tickets failed (with error details)
+- Files deleted from docs/jira/
 - Total story points synced
 
 ## Commands
@@ -112,5 +119,9 @@ Created:
 Skipped (already exist):
 - MEM-3, MEM-4, MEM-5
 
-Summary: 2 created, 3 skipped, 18 story points synced
+Deleted from docs/jira/:
+- MEM-001.md
+- MEM-002.md
+
+Summary: 2 created, 3 skipped, 2 files deleted, 18 story points synced
 ```

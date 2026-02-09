@@ -77,19 +77,21 @@ api/
    - Extract: title (summary), description, tasks, acceptance criteria
    - If the ticket cannot be found, inform the user and stop
 
-2. **ALWAYS sync with main and use git worktree**: Before creating a new branch, you MUST ensure you're on main with the latest code and use git worktree for isolation:
-   - Run: `cd /Users/israelmendesdasilva/Desktop/code/memwright` (go to main worktree)
+2. **ALWAYS sync with main**: Before creating a new branch, you MUST ensure you're on main with the latest code:
+   - Run: `cd .. && cd memwright` (move to main worktree)
    - Run: `git checkout main`
-   - Run: `git pull`
+   - Run: `git pull` (get latest changes from remote)
    - **NEVER create a branch from another feature branch**
 
 3. **Create a feature branch with worktree**: Based on the ticket title, create a branch name and worktree:
    - Format: `<ticket-id-lowercase>-<title-slug>`
    - Convert the title to lowercase, replace spaces with hyphens, remove special characters
    - Example: Ticket `MEM-1` with title "Project Scaffolding and Docker Setup" → branch `mem-1-project-scaffolding-and-docker-setup`
-   - Clean up existing worktree if present: `git worktree remove ../memwright-<branch-name> --force 2>/dev/null || true`
-   - Create new worktree: `git worktree add ../memwright-<branch-name> -b <branch-name>`
-   - Change to worktree: `cd ../memwright-<branch-name>`
+
+   Execute these steps in order:
+   - a) Delete old worktree if it exists: `git worktree remove ../memwright-<branch-name> --force 2>/dev/null || true`
+   - b) Create new worktree with branch: `git worktree add ../memwright-<branch-name> -b <branch-name>`
+   - c) Change to the new worktree: `cd ../memwright-<branch-name>`
 
 4. **Analyze the ticket**: Review the requirements and identify:
    - Which handlers need to be created or modified
@@ -179,8 +181,14 @@ api/
    - Title: "Project Scaffolding and Docker Setup"
    - Description: Initialize Go project structure...
    - Tasks: Set up directory structure, Configure Docker Compose...
-3. Syncs with main: `cd /Users/israelmendesdasilva/Desktop/code/memwright && git checkout main && git pull`
-4. Creates worktree: `git worktree remove ../memwright-mem-1-project-scaffolding-and-docker-setup --force 2>/dev/null || true && git worktree add ../memwright-mem-1-project-scaffolding-and-docker-setup -b mem-1-project-scaffolding-and-docker-setup && cd ../memwright-mem-1-project-scaffolding-and-docker-setup`
+3. Syncs with main:
+   - `cd .. && cd memwright`
+   - `git checkout main`
+   - `git pull`
+4. Prepares worktree:
+   - Deletes old worktree: `git worktree remove ../memwright-mem-1-project-scaffolding-and-docker-setup --force 2>/dev/null || true`
+   - Creates new worktree: `git worktree add ../memwright-mem-1-project-scaffolding-and-docker-setup -b mem-1-project-scaffolding-and-docker-setup`
+   - Switches to worktree: `cd ../memwright-mem-1-project-scaffolding-and-docker-setup`
 5. Explores the codebase and plans implementation
 6. Implements changes following the layered architecture
 7. Stops for user review
